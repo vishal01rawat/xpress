@@ -13,19 +13,34 @@ const Upload = () => {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit, setValue } = useForm();
 
-  const onSubmit = async (data:any) => {
-    try {
-      setLoading(true);
-      console.log(data,"data aya kya")
-      // Make your API call here
-      const response = await axios.post('your-api-endpoint', data);
-      console.log(response.data); // Log the response if needed
-      setLoading(false);
-    } catch (error) {
-      console.error('Error:', error);
-      setLoading(false);
-    }
-  };
+const onSubmit = async (data) => {
+  try {
+    setLoading(true);
+    console.log(data, "data aya kya");
+
+    // Create a payload object
+    const payload = {
+      Data: {
+        class: data.class,
+        topic: data.topic,
+        description: data.description
+      },
+      Files: {
+        files: data.Files
+      }
+    };
+
+    // Make your API call here
+    const response = await axios.post('your-api-endpoint', payload);
+    console.log(response.data); // Log the response if needed
+
+    setLoading(false);
+  } catch (error) {
+    console.error('Error:', error);
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="my-10 flex justify-center">
