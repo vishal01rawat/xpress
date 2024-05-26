@@ -11,7 +11,7 @@ function Header() {
   };
 
   return (
-    <nav className="flex  justify-between p-1 bg-gray-600 text-black">
+    <nav className="flex  justify-between p-2 bg-customBlack  text-black">
     <div className="flex items-center ml-10 mr-5">
       <img   src={`${urlPath.icon}logo.png`} alt="Logo" className="h-8 " />
       
