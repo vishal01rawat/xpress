@@ -11,6 +11,7 @@ import EmailSend from "./pages/EmailSend.tsx";
 import ForgotPassword from "./pages/ForgotPassword.tsx";
 import Upload from "./pages/UploadContent.tsx";
 import Watch from "./pages/WatchContent.tsx";
+import UploadedData from "./pages/UploadedData.tsx";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -31,6 +32,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route path="/" element={<Layout />}>
             <Route path="upload" element={<Upload />} />
             <Route path="watch" element={<Watch />} />
+            <Route path="uploaded-data" element={<UploadedData />} />
             
             
           </Route>
