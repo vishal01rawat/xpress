@@ -6,9 +6,9 @@
 
 	export type Watch = {
 		
-		PHONE: any;
-		EMAIL: any;
-		
-		ACTION: any;
+		CLASS: any;
+		TOPIC: any;
+		DESCRIPTION: any;
+		ACTION:any
 		
 	  };

@@ -10,21 +10,16 @@ import { useQuery } from "react-query";
 import { ENV } from "../environment";
 
 
-export default function useRoomsList(defaultValue?: any) {
-    const fetch = async (defaultValue: any) => {
-        const payload = {
-            Active : defaultValue
-        };
-
-        const token = localStorage.getItem("token");
+export default function useWatchContent() {
+    const fetch = async () => {
 
         const response = await axios.post(
-            `${ENV.BASE_URL}/Rooms/GetAllRooms`,
-            payload,
+            `${ENV.BASE_URL}/Learning/GetAll`,
+
             {
                 headers: {
                     "Content-Type": "application/json",
-                    Authorization: token && `Bearer ${JSON.parse(token)}`,
+
                 },
             }
         );
@@ -33,21 +28,22 @@ export default function useRoomsList(defaultValue?: any) {
             const list = response.data.map((item: any, index: number) => {
                 return {
 
-                    FLOOR: item?.floor,
-                    ROOMTYPE: item?.roomTypeId,
-                    ROOMNUMBER: item?.roomNumber,
-                    ROOMNAME: item?.roomName,
+                    CLASSID: item?.classId,
+                    CLASS: item?.class1,
+                    TOPIC: item?.topic,
+                    DESCRIPTION: item?.roomName,
+                    ACTIVE: item?.classId,
 
                 };
             });
-            
-            return { isSuccess: true, roomsList: list };
+
+            return { isSuccess: true, contentList:list };
         }
     };
 
     const response = useQuery({
-        queryKey: ["employee", defaultValue],
-        queryFn: () => fetch(defaultValue),
+        queryKey: ["employee"],
+        queryFn: () => fetch,
         refetchOnWindowFocus: false,
     });
 
