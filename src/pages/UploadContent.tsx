@@ -43,9 +43,9 @@ const onSubmit = async (data:any) => {
 
 
   return (
-    <div className="my-10 flex justify-center">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mb-6">
+    <div className="my-5 mx-10">
+      <form onSubmit={handleSubmit(onSubmit)} className="w-full max-w-lg">
+        <div className="mb-6 ">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="class">
             Select Class
           </label>
@@ -71,6 +71,19 @@ const onSubmit = async (data:any) => {
             placeholder="Enter topic"
             
             {...register("topic")}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="link">
+            Link
+          </label>
+          <input
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="link"
+            type="text"
+            placeholder="Enter Link"
+            
+            {...register("link")}
           />
         </div>
         <div className="mb-4">
@@ -107,6 +120,18 @@ const onSubmit = async (data:any) => {
             accept="video/*"
             multiple
             
+            {...register("Files")}
+          />
+        </div>
+        <div className="mb-6">
+          <label className="block text-gray-700 text-sm font-bold mb-2">
+            Upload Image Files
+          </label>
+          <input
+            id="Files"
+            type="file"
+            accept="image/*"
+            multiple
             {...register("Files")}
           />
         </div>
