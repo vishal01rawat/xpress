@@ -24,7 +24,7 @@ import { urlPath } from '../../utils/Url';
 export const watchContentButton = (info: any) => {
 	
 	const navigate = useNavigate();
-	const sidebar: any = useOutletContext();
+	// const sidebar: any = useOutletContext();
 	// const userRoles = sidebar?.filter((item: any) => {
 	// 	return item?.path == '/organisation';
 	// });
@@ -46,7 +46,7 @@ export const watchContentButton = (info: any) => {
         <button onClick={() => navigateHandler(info)}>
             <img
                 className='border h-[28px] bg-icons rounded-md w-[28px] p-2 '
-                src={`${urlPath.icon}pencil-solid.svg`}
+                src={`${urlPath.icon}view.png`}
             />
         </button>
   
