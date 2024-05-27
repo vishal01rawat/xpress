@@ -31,7 +31,7 @@ export default function useWatchContent() {
                     CLASS: item?.class1,
                     TOPIC: item?.topic,
                     DESCRIPTION: item?.roomName,
-                    ACTIVE: item?.classId,
+                    ACTION: item?.classId,
                 }));
 
                 return { isSuccess: true, contentList: list };
