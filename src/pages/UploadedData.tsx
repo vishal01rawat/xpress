@@ -17,7 +17,8 @@ function UploadedData() {
     }
 
 
-
+    const searchParams = new URLSearchParams(location.search);
+    const classId = searchParams.get("classId");
 
     const [providerList, setProviderList] = useState([]);
     const fetchWatchList = async (id: any) => {
@@ -25,30 +26,27 @@ function UploadedData() {
         const payload = {
           classId: +id,
         };
-        const token = localStorage.getItem("token");
+        
         const response = await axios.post(
-          `${ENV.BASE_URL}/Provider/GetByOrganizationId`,
+          `${ENV.BASE_URL}/Learning/Files`,
           payload,
           {
             headers: {
               "Content-Type": "application/json",
-              Authorization: token && `Bearer ${JSON.parse(token)}`,
+             
             },
           }
         );
         if (response.status === 200) {
           const providerList = response.data.map((item: any) => {
             return {
-              id: item.providerId,
-              title: item.providerName,
-              budgetScans: item.monthlyScanLimit,
-              currentScans: item.currentScan,
+           
             };
           });
           setProviderList(providerList);
         }
       } catch (err: any) {
-        toast.error(err?.response?.data?.message || err?.message || err);
+       console.log(err,"Error");
       }
     };
   
