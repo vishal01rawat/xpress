@@ -1,5 +1,9 @@
 import React from 'react';
 import useWatchContent from '../service/useWatchContent';
+import { useEffect,useState } from 'react';
+import axios from 'axios';
+import { ENV } from "../environment";
+
 
 function UploadedData() {
     const { data, isLoading, isError } = useWatchContent();
@@ -11,6 +15,48 @@ function UploadedData() {
     if (isError) {
         return <div>Error fetching data</div>;
     }
+
+
+
+
+    const [providerList, setProviderList] = useState([]);
+    const fetchWatchList = async (id: any) => {
+      try {
+        const payload = {
+          classId: +id,
+        };
+        const token = localStorage.getItem("token");
+        const response = await axios.post(
+          `${ENV.BASE_URL}/Provider/GetByOrganizationId`,
+          payload,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: token && `Bearer ${JSON.parse(token)}`,
+            },
+          }
+        );
+        if (response.status === 200) {
+          const providerList = response.data.map((item: any) => {
+            return {
+              id: item.providerId,
+              title: item.providerName,
+              budgetScans: item.monthlyScanLimit,
+              currentScans: item.currentScan,
+            };
+          });
+          setProviderList(providerList);
+        }
+      } catch (err: any) {
+        toast.error(err?.response?.data?.message || err?.message || err);
+      }
+    };
+  
+    useEffect(() => {
+      fetchWatchList(classId);
+    }, []);
+
+
 
     return (
         <div>
