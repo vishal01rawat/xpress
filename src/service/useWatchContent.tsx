@@ -12,38 +12,40 @@ import { ENV } from "../environment";
 
 export default function useWatchContent() {
     const fetch = async () => {
+        try {
+            const response = await axios.post(
+                `${ENV.BASE_URL}/Learning/GetAll`,
+                {}, // empty object for the request body
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
 
-        const response = await axios.post(
-            `${ENV.BASE_URL}/Learning/GetAll`,
+            console.log(response.data);
 
-            {
-                headers: {
-                    "Content-Type": "application/json",
-
-                },
-            }
-        );
-        console.log(response.data)
-        if (response.status === 200) {
-            const list = response.data.map((item: any, index: number) => {
-                return {
-
-                    CLASSID: item?.classId,
+            if (response.status === 200) {
+                const list = response.data.map((item: any, index: number) => ({
+                    CLASSID:item?.classId,
                     CLASS: item?.class1,
                     TOPIC: item?.topic,
                     DESCRIPTION: item?.roomName,
                     ACTIVE: item?.classId,
+                }));
 
-                };
-            });
-
-            return { isSuccess: true, contentList:list };
+                return { isSuccess: true, contentList: list };
+            }
+        } catch (error) {
+            console.error("Error fetching content:", error);
         }
+
+        return { isSuccess: false, contentList: [] }; // return a default value in case of failure
     };
 
     const response = useQuery({
-        queryKey: ["employee"],
-        queryFn: () => fetch,
+        queryKey: ["classId"],
+        queryFn: fetch, // removed the function wrapper here
         refetchOnWindowFocus: false,
     });
 

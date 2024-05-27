@@ -18,7 +18,7 @@ function Watch() {
              <span>Loading...</span>   <Spinner />
            </div>
         ) : (
-          <Table column={WatchColumn} data={data?.contentList || []} /> 
+          <Table column={WatchColumn} data={data?.contentList|| []} /> 
         )}
       </div>
     </div>
